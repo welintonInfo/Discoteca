@@ -1,0 +1,49 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 form-group"><h1>Generos musicais</h1></div>
+    </div>
+    <hr>
+<?php
+$form = $this->form;
+
+$form->prepare();
+echo $this->form()->openTag($form);
+echo $this->formCollection($form);
+echo $this->form()->closeTag();
+
+echo '<br />';
+if ($this->msg == 2)
+    echo '<div class="alert alert-info">Atualizado com sucesso<button type="button" class="close" data-dismiss="alert">x</button></div>';
+if ($this->msg == 1)
+     echo '<div class="alert alert-success">Registro cadastrado com sucesso.<button type="button" class="close" data-dismiss="alert">x</button></div>';
+?>
+    <div class="table-responsive">
+<table class="table table-striped" border="1" width="80%">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Genero</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->dados as $genero): ?>
+        <tr>
+            <td><?php echo $genero->getId();?></td>
+            <td><?php echo $genero->getNome();?></td>
+             <td>
+               <a class="btn btn-success" href="<?= $this->url('full-app', ['controller' => 'genero',
+            'action' => 'index', 'id' => $genero->getId()]);
+                    ?>"><div class="glyphicon glyphicon-pencil"></div></a>
+                    |
+                    <a class="btn btn-danger" href="<?=$this->url('full-app',['controller'=>'genero', 
+                    'action'=>'delete','id'=>$genero->getId()]);?>"><div class="glyphicon glyphicon-remove"></div></a>
+                
+            </td>
+        </tr>  
+        <?php endforeach;?>
+        
+    </tbody>
+</table>
+    </div>

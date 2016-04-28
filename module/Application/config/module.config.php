@@ -10,49 +10,70 @@
 namespace Application;
 
 return array(
-    'router' => array(
-        'routes' => array(
-            'home' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+   'router' => ['routes' => ['home-sec' => ['type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => ['route' => '/',
+                    'defaults' => ['controller' => 'Application\Controller\Index',
+                        'action' => 'index',
+                    ],
+                ],
+            ],
+       'paginator' => array(
+                'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/',
+                    'route' => '[/page/:page]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'page' => '\d+'
+                    ),
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action'     => 'index',
+                        'action' => 'index',
+                        'page' => 1
                     ),
                 ),
             ),
-            // The following is a route to simplify getting started creating
-            // new controllers and actions without needing to create a new
-            // module. Simply drop new controllers in, and you can access them
-            // using the path /application/:controller/:action
-            'application' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/application',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Index',
-                        'action'        => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/[:controller[/:action]]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                            ),
-                        ),
-                    ),
-                ),
+            'full-app' => ['type' => 'Segment',
+                'options' => ['route' => '/application[/:controller]/:action[[/id]/:id]'
+                    . '[/turma/:turma][/curso/:curso][/page/:page]',
+                    'constraints' => ['controller' => '[a-zA-Z_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]+',
+                        'turma' => '[0-9]+',
+                        'page' => '[0-9]+',
+                    ],
+                    'defaults' => ['__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'index',
+                        'action' => 'index',
+                    ],
+                ],
+            ],
+            'full-app2' => ['type' => 'Segment',
+                'options' => ['route' => '/application[/:controller][/:action][[/id]/:id][/page/:page]',
+                    'constraints' => ['controller' => '[a-zA-Z_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]+',
+                        'page' => '[0-9]+',
+                    ],
+                    'defaults' => ['__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'index',
+                        'action' => 'index',
+                    ],
+                ],
+            ],
+        ],
+    ],
+'doctrine' => array(
+        'driver' => array(
+            __NAMESPACE__ . '_driver' => array(
+                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'cache' => 'array',
+                'paths' => array(__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity')
             ),
-        ),
+            'orm_default' => array(
+                'drivers' => array(
+                    __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
+                )
+            )
+        )
     ),
     'service_manager' => array(
         'abstract_factories' => array(
@@ -75,7 +96,14 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => Controller\IndexController::class
+            'Application\Controller\Index' => Controller\IndexController::class,
+            'Application\Controller\Artista' => Controller\ArtistaController::class,
+            'Application\Controller\Album' => Controller\AlbumController::class,
+            'Application\Controller\Genero' => Controller\GeneroController::class,
+            'Application\Controller\Musica' => Controller\MusicaController::class,
+            'Application\Controller\Produtora' => Controller\ProdutoraController::class,
+            'Application\Controller\Fatorial' => Controller\FatorialController::class,
+            
         ),
     ),
     'view_manager' => array(

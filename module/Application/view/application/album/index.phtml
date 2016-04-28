@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 form-group"><h1>Meus Albuns</h1></div>
+    </div>
+   
+       <hr>
+
+<?php
+
+
+$form = $this->form;
+
+$form->prepare();
+echo $this->form()->openTag($form);
+echo $this->formCollection($form);
+echo $this->form()->closeTag();
+
+echo '<br />';
+if ($this->msg == 2)
+    echo '<div class="alert alert-info">Atualizado com sucesso<button type="button" class="close" data-dismiss="alert">x</button></div>';
+if ($this->msg == 1)
+     echo '<div class="alert alert-success">Registro cadastrado com sucesso.<button type="button" class="close" data-dismiss="alert">x</button></div>';
+if ($this->msgError)
+    echo '<div class="alert alert-danger">'.$this->msgError.'<button type="button" class="close" data-dismiss="alert">x</button></div>';
+?>  
+       <div class="table-responsive">
+<table class="table table-striped" border="1" width="80%">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Album</th>
+            <th>Artista/Banda</th>
+            <th>Produtora</th>
+            <th>valor</th> 
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->dados as $album): ?>
+            <tr>
+                <td><?php echo $album->getId(); ?></td>
+                <td><?php echo $album->getNome(); ?></td>
+                <td><?php  echo $album->getArtista()->getNome(); ?></td> 
+                <td><?php  echo $album->getProdutora()->getNome(); ?></td> 
+                <td><?php if($album->getValor() == 0 || $album->getValor() == null)
+                                echo 'R$ 0.00';
+                            else {
+                                echo 'R$ '.$album->getValor();    
+                            }      
+                    ?></td> 
+                <td>
+                    <a class="btn btn-success" href="<?= $this->url('full-app', ['controller' => 'album',
+            'action' => 'index', 'id' => $album->getId()]);
+                    ?>"><div class="glyphicon glyphicon-pencil"></div></a>
+                    |
+                    <a class="btn btn-danger" href="<?=$this->url('full-app',['controller'=>'album', 
+                    'action'=>'delete','id'=>$album->getId()]);?>"><div class="glyphicon glyphicon-remove"></div></a> 
+                    |
+                    <a class="btn btn-info" href="<?=$this->url('full-app',['controller'=>'album', 
+                    'action'=>'listar','id'=>$album->getId()]);?>"><div class="glyphicon glyphicon-search"></div></a> 
+                </td>
+            </tr>  
+<?php endforeach; ?>
+
+    </tbody>
+</table>
+       </div>

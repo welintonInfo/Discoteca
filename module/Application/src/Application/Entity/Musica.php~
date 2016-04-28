@@ -1,0 +1,53 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Musica
+ *
+ * @ORM\Table(name="musica", indexes={@ORM\Index(name="fk_Musica_Album1_idx", columns={"Album_id"}), @ORM\Index(name="fk_Musica_Genero1_idx", columns={"Genero_id"})})
+ * @ORM\Entity
+ */
+class Musica
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nome", type="string", length=100, nullable=true)
+     */
+    private $nome;
+
+    /**
+     * @var \Application\Entity\Album
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\Album")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="Album_id", referencedColumnName="id")
+     * })
+     */
+    private $album;
+
+    /**
+     * @var \Application\Entity\Genero
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\Genero")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="Genero_id", referencedColumnName="id")
+     * })
+     */
+    private $genero;
+
+
+}
+

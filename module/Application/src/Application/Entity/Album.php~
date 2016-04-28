@@ -1,0 +1,60 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Album
+ *
+ * @ORM\Table(name="album", indexes={@ORM\Index(name="fk_Album_Produtora1_idx", columns={"Produtora_id"}), @ORM\Index(name="fk_Album_Artista1_idx", columns={"Artista_id"})})
+ * @ORM\Entity
+ */
+class Album
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nome", type="string", length=100, nullable=true)
+     */
+    private $nome;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="valor", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $valor;
+
+    /**
+     * @var \Application\Entity\Artista
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\Artista")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="Artista_id", referencedColumnName="id")
+     * })
+     */
+    private $artista;
+
+    /**
+     * @var \Application\Entity\Produtora
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\Produtora")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="Produtora_id", referencedColumnName="id")
+     * })
+     */
+    private $produtora;
+
+
+}
+
