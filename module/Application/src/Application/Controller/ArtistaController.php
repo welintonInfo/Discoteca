@@ -52,8 +52,8 @@ class ArtistaController extends AbstractController
     {
       @$em = $this->getServiceLocator()->get('Doctrine\orm\EntityManager');
        $repo = $this->getEntity('Artista');      
-         $req = $this->getRequest();
-        $id = $this->params()->fromRoute('id',0);
+       $req = $this->getRequest();
+       $id = $this->params()->fromRoute('id',0);
        if($repo->delete($id))
            $msg = 'Registro deletado';
         
