@@ -21,13 +21,13 @@ class AlbumController extends AbstractController
         if($req->isPost())
         {
             try{
-                 $post = $req->getPost()->toArray();
-                 $msg = $repo->salvar($post);
+                $post = $req->getPost()->toArray();
+                $msg = $repo->salvar($post);
             } catch (DBALException $ex) {
-                  $msgError = "Impossivel salvar registro!<br> Necessário preencher todos os campos Artista/Banda* e Produtora* ";  
-            }   
-           
-          
+                $msgError = "Impossivel salvar registro!<br> Necessário preencher todos os campos Artista/Banda* e Produtora* ";
+            }
+
+
         }else
         {
             if($id)
@@ -35,9 +35,9 @@ class AlbumController extends AbstractController
                 $album = $repo->find($id);
                 $formAlbum->setData($album->toArray());
             }
-        }         
+        }
         $dados = $repo->findAll();
-        
+
         return new ViewModel(array('dados' => $dados,'form' => $formAlbum, 'msg' => $msg, 'msgError' => $msgError));
        
     }
@@ -71,7 +71,7 @@ class AlbumController extends AbstractController
         if($repo)
             {
                
-                $formAlbum->setData($repo->toArray());
+                $formAlbum->setData($repo->findAll());
             }
        
         return new ViewModel(array('dados' => $repo,'form' => $formAlbum));
