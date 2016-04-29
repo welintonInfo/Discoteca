@@ -132,13 +132,12 @@ class Musica
         return $this->genero;
     }
     
-    public function ListaMusicaAlbum($idAlbum)
+    public function findBy($idAlbum)
     {
-        return findBy(
-                 array(
-                   'album' => $idAlbum,        // $where 
-                   'nome' => 'ASC',    // $orderBy
-                ));
+        return [
+                'album' => $idAlbum,        // $where 
+                'nome' => 'ASC',    // $orderBy
+                ];
     }
     
      public function toArray()

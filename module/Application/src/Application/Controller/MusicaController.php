@@ -53,4 +53,25 @@ class MusicaController extends AbstractController
         return $this->redirect()->toRoute('full-app',array('controller' => 'musica'));
       
     }
+    
+    public function listarAction()
+    {
+        $entity = $this->getEntity('Musica');
+        $req = $this->getRequest();
+        $params['Album'] = $this->getOptionSelect('Album');
+        $params['Genero'] = $this->getOptionSelect('Genero');
+        $idAlbum = $this->params()->fromRoute('id',0);
+        $formMusica = new FormMusica($params);      
+        
+        if ($idAlbum)
+        {
+            $musica = $entity->findBy($idAlbum);
+            $formMusica->setData($musica->toArray());
+        }
+        
+       
+        return new ViewModel(array('dados' => $musica,'form' => $formMusica));
+    }
+    
+    
 }
