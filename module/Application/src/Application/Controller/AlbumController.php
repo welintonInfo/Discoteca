@@ -24,7 +24,8 @@ class AlbumController extends AbstractController
                 $post = $req->getPost()->toArray();
                 $msg = $repo->salvar($post);
             } catch (DBALException $ex) {
-                $msgError = "Impossivel salvar registro!<br> Necessário preencher todos os campos Artista/Banda* e Produtora* ";
+                $msgError = "Impossivel salvar registro!<br>
+                    Necessário preencher todos os campos Artista/Banda* e Produtora* ";
             }
 
 
