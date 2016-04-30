@@ -6,10 +6,7 @@
        <hr>
 
 <?php
-use Doctrine\DBAL\DBALException;
-
 $form = $this->form;
-
 $form->prepare();
 echo $this->form()->openTag($form);
 echo $this->formCollection($form);
@@ -56,40 +53,38 @@ if ($this->msgError)
                     <a class="btn btn-danger" href="<?=$this->url('full-app',['controller'=>'album',
                     'action'=>'delete','id'=>$album->getId()]);?>"><div class="glyphicon glyphicon-remove"></div></a>
                     |
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalMusicas<?php echo $album->getId(); ?>">
-                                                     <div class="glyphicon glyphicon-search"></div> </button> 
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalMusicas<?php echo $album->getId(); ?>">
+                                                     <div class="glyphicon glyphicon-search"></div>
+                    </button> 
                                    
-                    <div class="modal fade" id="myModalMusicas<?php echo $album->getId(); ?>">
+                    <div class="modal fade"id="myModalMusicas<?php echo $album->getId(); ?>">
                         <div class="modal-dialog">
-                                <div class="modal-content">
+                                <div class="modal-content fundo-modal"  >
                                     <div class="modal-header">
                                         <button class="close" aria-hidden="true" type="button" data-dismiss="modal">X</button>
                                         <h3 class="modal-title" align="center">Musicas do Album </h3>
                                         <h3 align="center"><strong><?php echo $album->getNome(); ?></strong></h3>
                                     </div>
                                     <div class="modal-body">
-                                        <h5 class="text-center"><strong>Musicas:</strong></h5>
-                                        <div class="table-responsive">    
-                                            <table class="table table-striped" id="tblGrid">
+                                        <div class="table-responsive" >    
+                                            <table class="table table-striped"  style="background-color: transparent;">
                                                 <thead id="tblHead">
                                                     <tr>
 
-                                                        <th>Nome</th>
+                                                        <th>Musicas</th>
 
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <?php
+                                                       <?php //   FOREACH PARA PEGAR AS MUSICAS DA ENTIDADE MUSICA PELA ORM ONETOMANY 
                                                         $i= 0;
                                                         $musicas = $album->getMusicas();
                                                             foreach ($musicas as $musica): ?>
                                                             <tr><td>                                                                       
-                                                                 <?php   if ($musica != null){ 
+                                                                 <?php   if ($musica != null)
                                                                              echo  ++$i.' - '.$musica->getNome(); 
-                                                                 }    
-                                                                                                                                                                                  
-                                                                ?>                                                                   
+                                                                 ?>                                                                   
                                                             </td><tr>
                                                         <?php endforeach; ?>
                                                     </tr>        
@@ -100,7 +95,7 @@ if ($this->msgError)
                                         </div>
                                     </div>
                                     <div class="modal-footer" id="naoImprime">
-                                        <button class="btn btn-default " type="button" data-dismiss="modal">Fechar</button>
+                                        <button class="btn btn-info " type="button" data-dismiss="modal">Fechar</button>
 
                                     </div>
 

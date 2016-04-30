@@ -35,3 +35,9 @@ div.container a.brand {
     margin-left: 0;
     padding: 8px 20px 12px 40px;
 }
+
+.fundo-modal {
+  background-image: -moz-linear-gradient( 90deg, rgb(175,193,203) 5%, rgb(255,255,255) 32%);
+  background-image: -webkit-linear-gradient( 90deg, rgb(175,193,203) 5%, rgb(255,255,255) 32%);
+  background-image: -ms-linear-gradient( 90deg, rgb(175,193,203) 5%, rgb(255,255,255) 32%);
+}
