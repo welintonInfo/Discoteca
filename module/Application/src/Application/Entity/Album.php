@@ -163,6 +163,16 @@ class Album
     {
         return $this->produtora;
     }
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Application\Entity\Musica", mappedBy="album")
+    */
+    private $musicas;
+    public function getMusicas()
+    {
+        return $this->musicas;
+    }
+    
      public function toArray()
     {
         return[

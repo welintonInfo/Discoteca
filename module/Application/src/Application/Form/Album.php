@@ -12,7 +12,7 @@ class Album extends Form
         parent::__construct($nome,$options);
      
 //        print_r($array);exit;
-//        $this->setAttribute('method','post');
+        $this->setAttribute('method','post');
         $id = new \Zend\Form\Element\Hidden('id');
         $this->add($id);
         

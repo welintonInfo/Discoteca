@@ -6,7 +6,7 @@
        <hr>
 
 <?php
-
+use Doctrine\DBAL\DBALException;
 
 $form = $this->form;
 
@@ -56,10 +56,60 @@ if ($this->msgError)
                     <a class="btn btn-danger" href="<?=$this->url('full-app',['controller'=>'album',
                     'action'=>'delete','id'=>$album->getId()]);?>"><div class="glyphicon glyphicon-remove"></div></a>
                     |
-                    <a class="btn btn-info" href="<?=$this->url('full-app',['controller'=>'musica',
-                    'action'=>'listar','id'=>$album->getId()]);?>"><div class="glyphicon glyphicon-search"></div></a>
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalMusicas<?php echo $album->getId(); ?>">
+                                                     <div class="glyphicon glyphicon-search"></div> </button> 
+                                   
+                    <div class="modal fade" id="myModalMusicas<?php echo $album->getId(); ?>">
+                        <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button class="close" aria-hidden="true" type="button" data-dismiss="modal">X</button>
+                                        <h3 class="modal-title" align="center">Musicas do Album </h3>
+                                        <h3 align="center"><strong><?php echo $album->getNome(); ?></strong></h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h5 class="text-center"><strong>Musicas:</strong></h5>
+                                        <div class="table-responsive">    
+                                            <table class="table table-striped" id="tblGrid">
+                                                <thead id="tblHead">
+                                                    <tr>
+
+                                                        <th>Nome</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <?php
+                                                        $i= 0;
+                                                        $musicas = $album->getMusicas();
+                                                            foreach ($musicas as $musica): ?>
+                                                            <tr><td>                                                                       
+                                                                 <?php   if ($musica != null){ 
+                                                                             echo  ++$i.' - '.$musica->getNome(); 
+                                                                 }    
+                                                                                                                                                                                  
+                                                                ?>                                                                   
+                                                            </td><tr>
+                                                        <?php endforeach; ?>
+                                                    </tr>        
+                                                </tbody>
+
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer" id="naoImprime">
+                                        <button class="btn btn-default " type="button" data-dismiss="modal">Fechar</button>
+
+                                    </div>
+
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
                 </td>
             </tr>
+            
 <?php endforeach; ?>
 
     </tbody>

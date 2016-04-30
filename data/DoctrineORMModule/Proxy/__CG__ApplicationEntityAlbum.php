@@ -64,10 +64,10 @@ class Album extends \Application\Entity\Album implements \Doctrine\ORM\Proxy\Pro
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'Application\\Entity\\Album' . "\0" . 'id', '' . "\0" . 'Application\\Entity\\Album' . "\0" . 'nome', '' . "\0" . 'Application\\Entity\\Album' . "\0" . 'valor', '' . "\0" . 'Application\\Entity\\Album' . "\0" . 'artista', '' . "\0" . 'Application\\Entity\\Album' . "\0" . 'produtora'];
+            return ['__isInitialized__', '' . "\0" . 'Application\\Entity\\Album' . "\0" . 'id', '' . "\0" . 'Application\\Entity\\Album' . "\0" . 'nome', '' . "\0" . 'Application\\Entity\\Album' . "\0" . 'valor', '' . "\0" . 'Application\\Entity\\Album' . "\0" . 'artista', '' . "\0" . 'Application\\Entity\\Album' . "\0" . 'produtora', '' . "\0" . 'Application\\Entity\\Album' . "\0" . 'musicas'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'Application\\Entity\\Album' . "\0" . 'id', '' . "\0" . 'Application\\Entity\\Album' . "\0" . 'nome', '' . "\0" . 'Application\\Entity\\Album' . "\0" . 'valor', '' . "\0" . 'Application\\Entity\\Album' . "\0" . 'artista', '' . "\0" . 'Application\\Entity\\Album' . "\0" . 'produtora'];
+        return ['__isInitialized__', '' . "\0" . 'Application\\Entity\\Album' . "\0" . 'id', '' . "\0" . 'Application\\Entity\\Album' . "\0" . 'nome', '' . "\0" . 'Application\\Entity\\Album' . "\0" . 'valor', '' . "\0" . 'Application\\Entity\\Album' . "\0" . 'artista', '' . "\0" . 'Application\\Entity\\Album' . "\0" . 'produtora', '' . "\0" . 'Application\\Entity\\Album' . "\0" . 'musicas'];
     }
 
     /**
@@ -274,6 +274,17 @@ class Album extends \Application\Entity\Album implements \Doctrine\ORM\Proxy\Pro
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getProdutora', []);
 
         return parent::getProdutora();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getMusicas()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getMusicas', []);
+
+        return parent::getMusicas();
     }
 
     /**

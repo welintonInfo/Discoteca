@@ -54,28 +54,4 @@ class AlbumController extends AbstractController
         return $this->redirect()->toRoute('full-app',array('controller' => 'album'));
     }    
       
-    public function listarAction()
-    { 
-        $em = $this->getServiceLocator()->get("Doctrine\ORM\EntityManager");
-          $id = $this->params()->fromRoute('id',0);
-            $param['artista']=$this->getOptionSelect('Artista');
-            $param['produtora']=$this->getOptionSelect('Produtora');
-            $formAlbum = new FormAlbum($param);   
-            
-          
-        $repo = $this->getEntity('Musica')->findBy(
-                 array(
-                   'album' => $id,        // $where 
-                   'nome' => 'ASC',    // $orderBy
-                ));
-        
-        if($repo)
-            {
-               
-                $formAlbum->setData($repo->findAll());
-            }
-       
-        return new ViewModel(array('dados' => $repo,'form' => $formAlbum));
-    }
-    
 }

@@ -257,6 +257,17 @@ class Musica extends \Application\Entity\Musica implements \Doctrine\ORM\Proxy\P
     /**
      * {@inheritDoc}
      */
+    public function findBy($idAlbum)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'findBy', [$idAlbum]);
+
+        return parent::findBy($idAlbum);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function toArray()
     {
 
