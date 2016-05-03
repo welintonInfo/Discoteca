@@ -14,6 +14,7 @@ class MusicaController extends AbstractController
         $entidade = $this->getEntity('Musica');
         $params['Album'] = $this->getOptionSelect('Album');
         $params['Genero'] = $this->getOptionSelect('Genero');
+        $params['Artista'] = $this->getOptionSelect('Artista');
          $msg = ''; 
          $msgError = null;
         $req = $this->getRequest();

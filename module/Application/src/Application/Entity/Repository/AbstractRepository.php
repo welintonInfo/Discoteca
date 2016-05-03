@@ -43,7 +43,7 @@ class AbstractRepository extends EntityRepository
         //print_r($data);exit;
         if ($data == '' || $data == null)
         {
-            return 'Por favor coloque os dados para gravar';
+            return 1;
         }
         else{       
         if(isset($data['id']) && $data['id']>0)

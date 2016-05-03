@@ -130,16 +130,8 @@ class Musica
     public function getGenero()
     {
         return $this->genero;
-    }
-    
-    public function findBy($idAlbum)
-    {
-        return [
-                'album' => $idAlbum,        // $where 
-                'nome' => 'ASC',    // $orderBy
-                ];
-    }
-    
+    }   
+       
      public function toArray()
     {
         return[

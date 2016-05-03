@@ -4,8 +4,16 @@
     </div>
    
        <hr>
-
+<script type="text/javascript" language="javascript" class="init">
+$(document).ready(function() {
+	$('#example').DataTable();
+} );
+</script> 
 <?php
+$this->headLink()->appendStylesheet('/css/tabelas/jquery.dataTables.css');
+$this->headScript()->prependFile('/js/tabelas/jquery.dataTables.js');   
+$this->headScript()->prependFile('/js/tabelas/jquery-1.12.0.min.js'); 
+
 $form = $this->form;
 $form->prepare();
 echo $this->form()->openTag($form);
@@ -20,8 +28,10 @@ if ($this->msg == 1)
 if ($this->msgError)
     echo '<div class="alert alert-danger">'.$this->msgError.'<button type="button" class="close" data-dismiss="alert">x</button></div>';
 ?>
+
+<h2 class="form-group">Lista dos Albuns</h2><br>
  <div class="table-responsive">
-<table class="table table-striped" border="1" width="80%">
+<table id="example" class="table table-striped table-bordered display" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>#</th>
@@ -56,20 +66,20 @@ if ($this->msgError)
                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalMusicas<?php echo $album->getId(); ?>">
                                                      <div class="glyphicon glyphicon-search"></div>
                     </button> 
-                                   
+               <!-- ICINIO MODAL DAS MUSICAS -->                    
                     <div class="modal fade"id="myModalMusicas<?php echo $album->getId(); ?>">
                         <div class="modal-dialog">
                                 <div class="modal-content fundo-modal"  >
                                     <div class="modal-header">
                                         <button class="close" aria-hidden="true" type="button" data-dismiss="modal">X</button>
-                                        <h3 class="modal-title" align="center">Musicas do Album </h3>
+                                        <h2 class="modal-title" align="center">Musicas do Album </h2>
                                         <h3 align="center"><strong><?php echo $album->getNome(); ?></strong></h3>
                                     </div>
                                     <div class="modal-body">
                                         <div class="table-responsive" >    
-                                            <table class="table table-striped"  style="background-color: transparent;">
-                                                <thead id="tblHead">
-                                                    <tr>
+                                            <table class="table table-striped display" style="background-color: transparent;">
+                                                <thead>
+                                                    <tr>  
 
                                                         <th>Musicas</th>
 
@@ -82,9 +92,12 @@ if ($this->msgError)
                                                         $musicas = $album->getMusicas();
                                                             foreach ($musicas as $musica): ?>
                                                             <tr><td>                                                                       
-                                                                 <?php   if ($musica != null)
-                                                                             echo  ++$i.' - '.$musica->getNome(); 
-                                                                 ?>                                                                   
+                                                                 <?php
+                                                                            if ($musica == null)
+                                                                                echo "não a musicas neste album";
+                                                                            else
+                                                                                echo ++$i . ' - ' . $musica->getNome();
+                                                                            ?>                                                                   
                                                             </td><tr>
                                                         <?php endforeach; ?>
                                                     </tr>        
@@ -101,7 +114,7 @@ if ($this->msgError)
 
                                 </div><!-- /.modal-content -->
                             </div><!-- /.modal-dialog -->
-                        </div><!-- /.modal -->
+                        </div><!-- /.FIM DO MODAL MUSICAS -->
                 </td>
             </tr>
             

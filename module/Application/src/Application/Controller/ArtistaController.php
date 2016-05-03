@@ -14,8 +14,7 @@ class ArtistaController extends AbstractController
 {
     public function indexAction()
     {
-        @$em = $this->getServiceLocator()->get('Doctrine\orm\EntityManager');
-        $repo = $em->getRepository('Application\Entity\Artista');
+        $repo = $this->getEntity('Artista');
         $req = $this->getRequest();
         $formArtista = new FormArtista();
          $msg = ''; 
@@ -37,12 +36,12 @@ class ArtistaController extends AbstractController
             
         
         $dados = $repo->findAll();
-        $page = $this->params()->fromRoute('page');
+       /* $page = $this->params()->fromRoute('page');
         $paginator = new Paginator(new ArrayAdapter($dados));
         $paginator->setCurrentPageNumber($page)
-                ->setDefaultItemCountPerPage(3);
+                ->setDefaultItemCountPerPage(3); */
         
-        return new ViewModel(array('dados' => $paginator,'form' => $formArtista, 'msg' => $msg));
+        return new ViewModel(array('dados' => $dados,'form' => $formArtista, 'msg' => $msg));
        
     }
     
