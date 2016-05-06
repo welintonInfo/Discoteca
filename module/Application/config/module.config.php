@@ -94,6 +94,34 @@ return array(
             ),
         ),
     ),
+    
+    
+    'login' => array(
+        'type' => 'Zend\Mvc\Router\Http\Literal',
+        'options' => array(
+            'route' => '/login',
+            'defaults' => array(
+                'controller' => 'Application\Controller\Login',
+                'action' => 'index',
+            ),
+        ),
+        'may_terminate' => true,
+        'child_routes' => array(
+            'default' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '[/:action]',
+                    'constraints' => array(
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ),
+                    'defaults' => array(),
+                ),
+            ),
+        ),
+    ),
+    
+    
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => Controller\IndexController::class,
@@ -103,6 +131,7 @@ return array(
             'Application\Controller\Musica' => Controller\MusicaController::class,
             'Application\Controller\Produtora' => Controller\ProdutoraController::class,
             'Application\Controller\Fatorial' => Controller\FatorialController::class,
+            'Application\Controller\Login' => Controller\LoginController::class,
             
         ),
     ),

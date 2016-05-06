@@ -15,7 +15,7 @@ class GeneroController extends AbstractController
     public function indexAction()
     {
         @$em = $this->getServiceLocator()->get('Doctrine\orm\EntityManager');
-         $repo = $this->getEntity('Genero');
+        $repo = $this->getEntity('Genero');
         $req = $this->getRequest();
         $formGenero = new FormGenero();
          $msg = ''; 
@@ -23,6 +23,7 @@ class GeneroController extends AbstractController
         if($req->isPost())
         {
             $post = $req->getPost()->toArray();
+            
             $msg = $repo->salvar($post);
            
         }else
@@ -37,12 +38,8 @@ class GeneroController extends AbstractController
             
         
         $dados = $repo->findAll();
-        $page = $this->params()->fromRoute('page');
-        $paginator = new Paginator(new ArrayAdapter($dados));
-        $paginator->setCurrentPageNumber($page)
-                ->setDefaultItemCountPerPage(5);
         
-        return new ViewModel(array('dados' => $paginator,'form' => $formGenero, 'msg' => $msg));
+        return new ViewModel(array('dados' => $dados,'form' => $formGenero, 'msg' => $msg));
        
     }
     
