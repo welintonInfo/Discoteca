@@ -3476,7 +3476,7 @@
 			lengths  = d2 ? menu[0] : menu,
 			language = d2 ? menu[1] : menu;
 	
-		var select = $('<select/>', {
+		var select = $('<select />', {
 			'name':          tableId+'_length',
 			'aria-controls': tableId,
 			'class':         classes.sLengthSelect
@@ -11386,7 +11386,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Mostrando _START_ / _END_ de _TOTAL_ registros",
+			"sInfo": "Mostrando _START_ a _END_ de _TOTAL_ registros",
 	
 	
 			/**
